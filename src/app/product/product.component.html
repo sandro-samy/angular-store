@@ -1,0 +1,12 @@
+<div class="container main-container">
+  <div class="container main-content row">
+    <div class="image-container col-lg-4 col-md-12">
+      <img [src]="product.image" class="w-100" [alt]="'image' + product.id" />
+    </div>
+    <div class="specs-container col-lg-4 col-md-12">
+      <h2 class="product-title">{{ product.name }}</h2>
+      <p class="product-description">Description : {{ product.description }}</p>
+      <!-- <p>Rating : <span *ngFor="let star of product.star" ></span></p> -->
+    </div>
+  </div>
+</div>

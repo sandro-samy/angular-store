@@ -1,0 +1,35 @@
+<div>
+  <img
+    [src]="product.image"
+    class="card-img-top"
+    [alt]="product.id"
+    [id]="product.id"
+    (click)="changeRouteTo(product.id)"
+  />
+  <div class="card-body">
+    <div (click)="changeRouteTo(product.id)">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">
+        {{ product.description }}
+      </p>
+      <p class="card-text">
+        {{ product.price | currency: "EGP":"code":"1.2-2":"fr" }}
+      </p>
+      <p class="card-text">rate : {{ product.rate }}/ 10</p>
+      <p class="card-text">
+        {{ product.createdAt | date: "MMM dd YYYY" }}
+      </p>
+      <p [ngStyle]="{ color: product.count ? 'green' : 'red' }">
+        {{ product.count | isInStock }}
+      </p>
+    </div>
+    <div class="w-100 d-flex justify-content-between">
+      <button href="#" class="btn btn-primary" [disabled]="!product.count">
+        Add to Card
+      </button>
+      <button (click)="changeRouteTo(product.id)" class="btn btn-dark">
+        more details
+      </button>
+    </div>
+  </div>
+</div>

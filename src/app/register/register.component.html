@@ -1,0 +1,196 @@
+<div
+  class="main-container container d-flex justify-content-center align-items-center"
+>
+  <form
+    class="rounded-5 shadow-lg p-4 form d-flex flex-column"
+    [formGroup]="form"
+    (ngSubmit)="handleSubmit()"
+  >
+    <div class="inputs-container mb-2">
+      <div class="mb-3 input">
+        <label for="exampleInputName1" class="form-label">Name</label>
+        <input
+          type="name"
+          class="form-control"
+          id="name"
+          aria-describedby="name"
+          formControlName="name"
+        />
+        <div
+          id="name"
+          *ngIf="
+          (name?.touched && name?.errors?.['required']) 
+        "
+          class="form-text text-danger"
+        >
+          Name is Required
+        </div>
+      </div>
+      <div class="mb-3 input">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          formControlName="email"
+        />
+        <div
+          id="emailHelp2"
+          *ngIf="email?.touched && email?.errors && email?.errors?.['pattern']"
+          class="form-text text-danger"
+        >
+          Email is Invalid
+        </div>
+        <div
+          id="emailHelp1"
+          *ngIf="email?.touched && email?.errors?.['required']"
+          class="form-text text-danger"
+        >
+          Email is Required
+        </div>
+      </div>
+      <div class="mb-3 input">
+        <label for="exampleInputName1" class="form-label">User Name</label>
+        <input
+          type="userName"
+          class="form-control"
+          id="userName"
+          aria-describedby="userName"
+          formControlName="userName"
+        />
+        <div
+          *ngIf="
+          (userName?.touched && userName?.errors?.['required']) 
+        "
+          class="form-text text-danger"
+        >
+          User Name is Required
+        </div>
+        <div
+          *ngIf="
+          (userName?.touched && userName?.errors?.['pattern']) 
+        "
+          class="form-text text-danger"
+        >
+          User Name is Invalid
+        </div>
+      </div>
+      <div class="mb-3 input">
+        <label for="exampleInputPassword" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          name="password"
+          formControlName="password"
+          maxlength="12"
+        />
+        <div
+          id="passwordHelp4"
+          *ngIf="
+          password?.touched &&
+          password?.errors?.['required']
+        "
+          class="form-text text-danger"
+        >
+          password is required
+        </div>
+        <div
+          id="passwordHelp2"
+          *ngIf="
+        (password?.touched && password?.errors?.['minlength'])
+        "
+          class="form-text text-danger"
+        >
+          password must be from 8 to 12 characters
+        </div>
+        <div
+          id="passwordHelp9"
+          *ngIf="
+      (password?.touched && password?.errors && password?.errors?.['pattern']) 
+      "
+          class="form-text text-warning"
+        >
+          Week password must include upperL, (A-Z), numbers , specialCharacter
+        </div>
+        <div
+          id="passwordHelp3"
+          *ngIf="
+          password?.touched && password?.errors && password?.errors?.['maxlength']
+          "
+          class="form-text text-danger"
+        >
+          password must be atmost 12 characters long
+        </div>
+      </div>
+      <div class="mb-3 input">
+        <label for="exampleInputpasswordConfirm" class="form-label"
+          >Confirm Password</label
+        >
+        <input
+          type="password"
+          class="form-control"
+          aria-describedby="passwordConfirm"
+          name="passwordConfirm"
+          formControlName="passwordConfirm"
+          maxlength="12"
+        />
+        <div
+          *ngIf="
+      (passwordConfirm?.touched && passwordConfirm?.errors?.['required']) 
+      "
+          class="form-text text-danger"
+        >
+          Confirm Password is Required
+        </div>
+        <div
+          class="form-text text-danger"
+          *ngIf="passwordConfirm?.touched && form.errors?.['noMatch']"
+        >
+          Confirm Password doesn't Match
+        </div>
+      </div>
+    </div>
+    <div
+      class="w-100 px-5 mb-3 container d-flex flex-column justify-content-end"
+    >
+      <!-- <button class="btn btn-outline-primary fs-6 mb-3" (click)="addAddress()">
+        add new Address +
+      </button>
+      <div
+        class="address"
+        formArrayName="Addresses"
+        *ngFor="let adder of addresses.controls; let i = index"
+      >
+        <h3 *ngIf="i">Address {{ i + 1 }}</h3>
+        <h3 *ngIf="i">Address 1</h3>
+        <form class="addresses-container row">
+          <div class="mb-3 col-4">
+            <label for="exampleInputName1" class="form-label">address</label>
+            <input type="text" class="form-control" formControlName="address" />
+          </div>
+          <div class="mb-3 col-4">
+            <label for="exampleInputName1" class="form-label">street</label>
+            <input type="text" class="form-control" formControlName="street" />
+          </div>
+          <div class="mb-3 col-4">
+            <label for="exampleInputName1" class="form-label">country</label>
+            <input type="text" class="form-control" formControlName="country" />
+          </div>
+          <div class="mb-3 col-4">
+            <label for="exampleInputName1" class="form-label">city</label>
+            <input type="text" class="form-control" formControlName="city" />
+          </div>
+        </form>
+      </div> -->
+    </div>
+    <button
+      type="submit"
+      class="btn btn-dark m-auto mb-3"
+      [disabled]="form.invalid"
+    >
+      Submit
+    </button>
+    <p>Already have account?<a class="link" routerLink="/login">Login</a></p>
+  </form>
+</div>

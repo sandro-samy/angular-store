@@ -1,0 +1,76 @@
+<div class="container d-flex justify-content-center align-items-center">
+  <form
+    class="w-25 rounded-5 shadow-lg p-4 form d-flex flex-column"
+    (ngSubmit)="handleSubmit(form)"
+    #form="ngForm"
+  >
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        ngModel
+        name="email"
+        #email="ngModel"
+        required
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      />
+      <div
+        id="emailHelp1"
+        *ngIf="
+          (email.touched && email.errors && email.errors['required']) ||
+          (form.submitted && email.errors && email.errors['required'])
+        "
+        class="form-text text-danger"
+      >
+        Email is Required
+      </div>
+      <div
+        id="emailHelp2"
+        *ngIf="
+          (email.touched && email.errors && email.errors['pattern']) ||
+          (form.submitted && email.errors && email.errors['pattern'])
+        "
+        class="form-text text-danger"
+      >
+        Email is Invalid
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        ngModel
+        name="password"
+        #password="ngModel"
+        required
+      />
+      <div
+        id="passwordHelp4"
+        *ngIf="
+          (password.touched &&
+            password.errors &&
+            password.errors['required']) ||
+          (form.submitted && password.errors && password.errors['required'])
+        "
+        class="form-text text-danger"
+      >
+        password is required
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="btn btn-dark m-auto mb-3"
+      [disabled]="form.errors && form.invalid"
+    >
+      Submit
+    </button>
+    <p>
+      Don't have account?<a class="link" routerLink="/register">Register</a>
+    </p>
+  </form>
+</div>
