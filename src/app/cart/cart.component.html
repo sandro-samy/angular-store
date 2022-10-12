@@ -1,0 +1,17 @@
+<div class="container main-container">
+  <div *ngIf="!count" class="empty-container">
+    <div class="container text-container text-center mb-5">
+      <h2 class="fs-1">Cart Empty</h2>
+      <p>Your Shopping Cart is Empty.</p>
+      <a routerLink="/product" class="text-decoration-none fs-5"
+        >Go to Store <fa-icon [icon]="shoppingCart"></fa-icon
+      ></a>
+    </div>
+    <div class="image-container m-auto">
+      <img src="../../assets/cart.svg" class="w-100" alt="Empty Cart" />
+    </div>
+  </div>
+  <div class="cart-container">
+    
+  </div>
+</div>

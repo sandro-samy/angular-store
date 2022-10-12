@@ -1,12 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import { faStar as emptyStart } from '@fortawesome/free-regular-svg-icons';
-import { concat, concatMap, map } from 'rxjs';
+import { map } from 'rxjs';
 import { Product } from '../interfaces/product';
 import { StarsService } from '../service/stars.service';
-
+import { CartService } from '../service/cart.service';
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -14,13 +17,16 @@ import { StarsService } from '../service/stars.service';
 })
 export class ProductComponent implements OnInit {
   faStar = faStar;
-  faStarHalf = faStarHalf;
+  faStarHalf = faStarHalfStroke;
   faEmptyStar = emptyStart;
+  faAngleLeft = faAngleLeft;
+  faArrowLeftLong = faArrowLeftLong;
   constructor(
     private activeRoute: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private starsService: StarsService
+    private starsService: StarsService,
+    private cartService: CartService
   ) {}
   product: Product = {
     image: '',
@@ -29,10 +35,12 @@ export class ProductComponent implements OnInit {
     price: '0',
     id: '0',
     createdAt: '',
+    starIcons: [],
     rate: 0,
     count: 0,
     reviews: [],
   };
+
   ngOnInit(): void {
     let id = this.activeRoute.snapshot.paramMap.get('id');
     console.log(id);
@@ -43,15 +51,16 @@ export class ProductComponent implements OnInit {
       .pipe(
         map((res: Product) => {
           res['starIcons'] = this.starsService.star(res.rate);
-          return res['starIcons'];
+          return res;
         })
       )
-      .subscribe((product: Product): void => {
+      .subscribe((product: Product) => {
         this.product = product;
         console.log(this.product);
       });
   }
-  getStars(rate: number): string[] {
-    return this.starsService.star(rate);
+  addToCart() {
+    this.product.count > 0 && this.cartService.addToCart(this.product);
+    // this.router.navigateByUrl('cart');
   }
 }

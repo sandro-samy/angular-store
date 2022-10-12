@@ -7,12 +7,13 @@ import { IsInStockPipe } from './pipe/is-in-stock.pipe';
 import { ProductsComponent } from './products/products.component';
 import { ProductCardComponent } from './products/product-card/productCard.component';
 import { ErrorComponent } from './error/error.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { StarsPipe } from './pipe/stars.pipe';
+import { ProductComponent } from './product/product.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -24,15 +25,16 @@ import { StarsPipe } from './pipe/stars.pipe';
     ErrorComponent,
     LoginComponent,
     RegisterComponent,
-    StarsPipe,
+    ProductComponent,
+    CartComponent,
   ],
   imports: [
+    FontAwesomeModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

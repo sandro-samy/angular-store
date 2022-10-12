@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { faStarHalf } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import { faStar as emptyStart } from '@fortawesome/free-regular-svg-icons';
 
 @Injectable({
   providedIn: 'root',
 })
+  
 export class StarsService {
   faStar = faStar;
-  faStarHalf = faStarHalf;
+  faStarHalf = faStarHalfStroke;
   faEmptyStar = emptyStart;
   constructor() {}
-  star(value: number): string[] {
+  star(value: number) {
     let arr = Array(10).fill(0);
-    // let valueAsNumber = parseInt(value);
-    return arr.map((_, i): string => {
-      if (value - (i + 1) >= 1) {
-        return 'faStar';
-      } else if (value - (i + 1) === 0.5) {
-        return 'faStarHalf';
+    return arr.map((_, i) => {
+      if (value - i >= 1) {
+        return this.faStar;
+      } else if (value - i === 0.5) {
+        return this.faStarHalf;
       } else {
-        return 'faEmptyStar';
+        return this.faEmptyStar;
       }
     });
   }

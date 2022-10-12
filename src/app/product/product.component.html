@@ -1,12 +1,44 @@
 <div class="container main-container">
+  <div class="container row pb-3">
+    <a class="pointer fs-5 text-dark" [routerLink]="['/product']"
+      ><fa-icon [icon]="faArrowLeftLong"></fa-icon> Back to store</a
+    >
+  </div>
   <div class="container main-content row">
-    <div class="image-container col-lg-4 col-md-12">
+    <div class="image-container col-lg-4 col-md-12 mb-4 mb-lg-0">
       <img [src]="product.image" class="w-100" [alt]="'image' + product.id" />
     </div>
-    <div class="specs-container col-lg-4 col-md-12">
-      <h2 class="product-title">{{ product.name }}</h2>
-      <p class="product-description">Description : {{ product.description }}</p>
-      <!-- <p>Rating : <span *ngFor="let star of product.star" ></span></p> -->
+    <div class="specs-container col-lg-4 col-md-12 mb-4 mb-lg-0">
+      <h2 class="mb-4">{{ product.name }}</h2>
+      <p>Description : {{ product.description }}</p>
+      <p>Released at : {{ product.createdAt | date: "MMM dd YYYY" }}</p>
+      <p>
+        Rating :
+        <span
+          *ngFor="let star of product.starIcons; let i = index"
+          class="text-warning"
+        >
+          <fa-icon [icon]="star"> </fa-icon>
+        </span>
+      </p>
+      <p>price : {{ product.price | currency: "EGP":"code":"1.2-2":"fr" }}</p>
+    </div>
+    <div class="action-container col-lg-4 col-md-12">
+      <div
+        class="inner-action-container d-flex flex-column justify-content-center rounded-3 shadow-lg border-2-dark w-100 p-4 mb-5 my-lg-0 mx-auto"
+      >
+        <div class="w-100 d-flex justify-content-between px-5">
+          <p>Price</p>
+          <p>:</p>
+          <p>{{ product.price | currency: "EGP":"code":"1.2-2":"fr" }}</p>
+        </div>
+        <div class="w-100 d-flex justify-content-between px-5">
+          <p>Status</p>
+          <p>:</p>
+          <p>{{ product.count | isInStock }}</p>
+        </div>
+        <button class="btn btn-dark" (click)="addToCart()">Add to Cart</button>
+      </div>
     </div>
   </div>
 </div>

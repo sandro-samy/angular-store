@@ -1,15 +1,18 @@
-<nav class="navbar navbar-expand-lg bg-dark mb-5 navbar-dark">
+<nav
+  class="navbar navbar-expand-lg bg-dark mb-5 navbar-dark sticky-top shadow-lg"
+>
   <div class="container">
-    <a class="navbar-brand" [routerLink]="['/product']">Navbar</a>
-    <div class="ms-auto me-lg-2 me-4 position-relative">
-      <fa-icon [icon]="faCartShopping" class="text-light"> </fa-icon>
+    <a class="navbar-brand fs-3" [routerLink]="['/product']">Logo</a>
+    <a class="ms-auto me-lg-2 me-4 position-relative  cart " [routerLink]="['/cart']" routerLinkActive="active">
+      <fa-icon [icon]="faCartShopping" class="text-light icon  opacity-50 fs-5"> </fa-icon>
       <span
         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        *ngIf="count > 0"
       >
-        9
+        {{ count }}
         <span class="visually-hidden">unread messages</span>
       </span>
-    </div>
+    </a>
     <button
       class="navbar-toggler"
       type="button"

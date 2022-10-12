@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { map } from 'rxjs';
 import { Product } from '../interfaces/product';
-import { store } from '../store/store';
+import { ProductsService } from '../service/products.service';
+import { StarsService } from '../service/stars.service';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -10,14 +12,14 @@ import { store } from '../store/store';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  constructor(private http: HttpClient, private route: Router) {}
+  constructor(
+    private http: HttpClient,
+    private starsService: StarsService,
+    private productsService: ProductsService
+  ) {}
   ngOnInit(): void {
-    this.http
-      .get<Product[]>(
-        'https://60523dc8fb49dc00175b7d04.mockapi.io/api/v1/products'
-      )
-      .subscribe((data: Product[]) => {
-        this.products = data;
-      });
+    this.productsService.allProducts.subscribe(
+      (data) => (this.products = data)
+    );
   }
 }

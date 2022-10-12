@@ -1,13 +1,13 @@
-<div>
+<div >
   <img
     [src]="product.image"
-    class="card-img-top"
+    class="card-img-top pointer"
     [alt]="product.id"
     [id]="product.id"
     (click)="changeRouteTo(product.id)"
   />
   <div class="card-body">
-    <div (click)="changeRouteTo(product.id)">
+    <div (click)="changeRouteTo(product.id)" class="pointer">
       <h5 class="card-title">{{ product.name }}</h5>
       <p class="card-text">
         {{ product.description }}
@@ -24,7 +24,12 @@
       </p>
     </div>
     <div class="w-100 d-flex justify-content-between">
-      <button href="#" class="btn btn-primary" [disabled]="!product.count">
+      <button
+        href="#"
+        class="btn btn-primary pointer"
+        (click)="addToCart()"
+        [disabled]="!product.count"
+      >
         Add to Card
       </button>
       <button (click)="changeRouteTo(product.id)" class="btn btn-dark">
