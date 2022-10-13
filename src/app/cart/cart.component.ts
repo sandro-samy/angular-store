@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from '../interfaces/product';
 import { CartService } from '../service/cart.service';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeftLong, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-regular-svg-icons';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -13,6 +17,10 @@ export class CartComponent implements OnInit {
   count: number = 0;
 
   shoppingCart = faShoppingCart;
+  faMinus = faMinus;
+  faPlus = faPlus;
+  faTrash = faTrashAlt;
+  faArrowLeftLong = faArrowLeftLong;
 
   constructor(private cartService: CartService) {
     console.log(this.items);
@@ -24,5 +32,14 @@ export class CartComponent implements OnInit {
     });
     this.cartService.total.subscribe((data) => (this.totalPrice = data));
     this.cartService.count.subscribe((data) => (this.count = data));
+  }
+  decrease(product: CartItem) {
+    this.cartService.decreament(product);
+  }
+  increase(product: CartItem) {
+    this.cartService.increament(product);
+  }
+  remove(productToRemove: CartItem) {
+    this.cartService.removeFromCart({ ...productToRemove });
   }
 }

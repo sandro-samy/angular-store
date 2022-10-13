@@ -1,3 +1,13 @@
-.image-container{
+.image-container {
   max-width: 600px;
+}
+.card-container {
+}
+.cell {
+  // max-width: 2vw;
+  height: max(70px, 8vw);
+}
+.total-count {
+  display: flex;
+  justify-content: center;
 }

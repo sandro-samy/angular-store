@@ -25,7 +25,6 @@ export class ProductsService implements OnInit {
         })
       );
   }
-
   ngOnInit(): void {}
   get allProducts() {
     return this.products;

@@ -8,3 +8,4 @@ export class IsInStockPipe implements PipeTransform {
     return value > 0 ? 'In Stock' : 'Out of Stock';
   }
 }
+  

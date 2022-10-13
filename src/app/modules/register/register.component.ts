@@ -11,17 +11,24 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { RegisterForm } from '../interfaces/register-form';
+import { Router } from '@angular/router';
+import { RegisterForm } from '../../interfaces/register-form';
+import { LoginService } from '../../service/login.service';
+import { CanComponentDeactivate } from 'src/app/guard/save-changes.guard';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, CanComponentDeactivate {
   form: FormGroup<RegisterForm>;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router
+  ) {
     this.form = this.fb.group(
       {
         name: ['', [Validators.required]],
@@ -51,6 +58,12 @@ export class RegisterComponent implements OnInit {
         validators: this.confirmMatchPassWord('password', 'passwordConfirm'),
       }
     );
+  }
+  leave(): boolean {
+    if (this.form.dirty && this.form.touched) {
+      return window.confirm('Are you sure you want to discard your data?');
+    }
+    return true;
   }
   private confirmMatchPassWord(confirm: string, password: string): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -107,6 +120,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   handleSubmit() {
-    console.log(this.form);
+    this.loginService.login();
+    this.router.navigate(['product']);
   }
 }

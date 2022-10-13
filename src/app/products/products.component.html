@@ -1,4 +1,8 @@
-<div class="row d-flex container m-auto mb-5 justify-content-center">
+
+<div
+  class="row d-flex container m-auto mb-5 justify-content-center"
+  *ngIf="!loading"
+>
   <app-product-card
     *ngFor="let product of products"
     [product]="product"

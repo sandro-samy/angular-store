@@ -1,2 +1,11 @@
-<app-navbar></app-navbar> 
+<app-navbar></app-navbar>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.3)"
+  size="medium"
+  color="#f00"
+  type="square-jelly-box"
+  [fullScreen]="true"
+>
+  <p style="color: #000; font-size: 3rem">Loading...</p></ngx-spinner
+>
 <router-outlet></router-outlet>

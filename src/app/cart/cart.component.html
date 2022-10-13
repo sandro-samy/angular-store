@@ -1,6 +1,6 @@
 <div class="container main-container">
   <div *ngIf="!count" class="empty-container">
-    <div class="container text-container text-center mb-5">
+    <div class="container-lg container-fluid text-container text-center mb-5">
       <h2 class="fs-1">Cart Empty</h2>
       <p>Your Shopping Cart is Empty.</p>
       <a routerLink="/product" class="text-decoration-none fs-5"
@@ -11,7 +11,90 @@
       <img src="../../assets/cart.svg" class="w-100" alt="Empty Cart" />
     </div>
   </div>
-  <div class="cart-container">
-    
+  <div class="cart-container" *ngIf="count">
+    <div class="container row pb-3">
+      <a class="pointer fs-5 text-dark" [routerLink]="['/product']"
+        ><fa-icon class="me-2" [icon]="faArrowLeftLong"></fa-icon>Add More Items</a
+      >
+    </div>
+    <h2 class="text-center mb-5">Cart Items</h2>
+    <table class="table mb-5">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">Title</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items" class="align-items-center">
+          <th scope="row  justify-content-center align-items-center">
+            {{ item.id }}
+          </th>
+          <td class="cell col justify-content-center align-items-center">
+            <img
+              [src]="item.image"
+              class="h-100"
+              [alt]="item.name + 'table Image'"
+            />
+          </td>
+          <td class="cell col">{{ item.name }}</td>
+          <td class="cell col">
+            {{ item.price | currency: "EGY":"code":"1.2-2":"fr" }}
+          </td>
+          <td class="cell col">
+            <div class="w-75 d-flex justify-content-between">
+              <button
+                class="btn btn-outline-danger ms-1"
+                (click)="decrease(item)"
+                [disabled]="item.quantity === 1"
+              >
+                <fa-icon [icon]="faMinus"></fa-icon>
+              </button>
+              <h4>{{ item.quantity }}</h4>
+              <button
+                class="btn btn-outline-success"
+                (click)="increase(item)"
+                [disabled]="item.quantity === item.count"
+              >
+                <fa-icon [icon]="faPlus"></fa-icon>
+              </button>
+            </div>
+          </td>
+          <td class="cell col">
+            <button class="btn btn-outline-danger" (click)="remove(item)">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row "></th>
+          <td class="col"></td>
+          <td class="col"></td>
+          <td class="col">
+            <h4>
+              {{ totalPrice | currency: "EGY":"code":"1.2-2":"fr" }}
+            </h4>
+          </td>
+          <td class="col">
+            <div class="w-75 d-flex justify-content-center">
+              <h2>
+                {{ count }}
+              </h2>
+            </div>
+          </td>
+          <td class="col"></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="container d-flex justify-content-center">
+      <button [disabled]="!count" class="btn btn-outline-success p-3">
+        Continue To Checkout
+        <fa-icon [icon]="shoppingCart"></fa-icon>
+      </button>
+    </div>
   </div>
 </div>

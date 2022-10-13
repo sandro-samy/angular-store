@@ -5,9 +5,9 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import { faStar as emptyStart } from '@fortawesome/free-regular-svg-icons';
 import { map } from 'rxjs';
-import { Product } from '../interfaces/product';
-import { StarsService } from '../service/stars.service';
-import { CartService } from '../service/cart.service';
+import { Product } from '../../../interfaces/product';
+import { StarsService } from '../../../service/stars.service';
+import { CartService } from '../../../service/cart.service';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 @Component({
